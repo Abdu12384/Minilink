@@ -2,6 +2,11 @@ import { container } from "tsyringe";
 import { repositoryRegister } from "./repository.register";
 import { serviceRegister } from "./service.register";
 import { AuthController } from "../controllers/auth.controller";
+import { IAuthController } from "../interface/controllerInterface/auth-controller.interface";
+import { IUserController } from "../interface/controllerInterface/user-controller.interface";
+import { UserController } from "../controllers/user.controller";
+import { IUrlController } from "../interface/controllerInterface/url-controller.interface";
+import { UrlController } from "../controllers/url.controller";
 
 
 export class DependencyInjection{
@@ -13,4 +18,6 @@ export class DependencyInjection{
 
  DependencyInjection.registerAll();
  
-export const authController = container.resolve(AuthController);    
+export const authController = container.resolve<IAuthController>(AuthController);   
+export const userController = container.resolve<IUserController>(UserController); 
+export const urlController = container.resolve<IUrlController>(UrlController); 
