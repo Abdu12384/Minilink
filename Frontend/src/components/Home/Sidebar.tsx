@@ -8,11 +8,9 @@ import { Link } from "react-router-dom";
 interface SidebarProps {
   isOpen: boolean
   onClose: () => void
-  isAuthenticated: boolean
-  onLoginLogout: () => void
 }
 
-export function Sidebar({ isOpen, onClose, isAuthenticated, onLoginLogout }: SidebarProps) {
+export function Sidebar({ isOpen, onClose }: SidebarProps) {
   const isMobile = useIsMobile()
 
   const navLinks = (
@@ -25,13 +23,6 @@ export function Sidebar({ isOpen, onClose, isAuthenticated, onLoginLogout }: Sid
         Dashboard
       </Link>
       <Link
-        to="/"
-        className="text-gray-300 hover:text-emerald-400 transition-colors text-lg font-medium py-2"
-        onClick={onClose}
-      >
-        Settings
-      </Link>
-      <Link
         to="/profile"
         className="text-gray-300 hover:text-emerald-400 transition-colors text-lg font-medium py-2"
         onClick={onClose}
@@ -39,18 +30,6 @@ export function Sidebar({ isOpen, onClose, isAuthenticated, onLoginLogout }: Sid
         Profile
       </Link>
     </>
-  )
-
-  const loginLogoutButton = (
-    <div className="mt-auto pt-4 border-t border-gray-700/50">
-      <Button
-        variant="default"
-        onClick={onLoginLogout}
-        className="w-full bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-bold py-3 rounded-full shadow-md"
-      >
-        {isAuthenticated ? "Logout" : "Login"}
-      </Button>
-    </div>
   )
 
   if (isMobile) {
@@ -74,7 +53,6 @@ export function Sidebar({ isOpen, onClose, isAuthenticated, onLoginLogout }: Sid
           </div>
           <nav className="flex flex-col gap-4">
             {navLinks}
-            {loginLogoutButton}
           </nav>
         </SheetContent>
       </Sheet>
@@ -103,7 +81,6 @@ export function Sidebar({ isOpen, onClose, isAuthenticated, onLoginLogout }: Sid
           </Link>
         </div>
         <nav className="flex flex-col gap-4 flex-1">{navLinks}</nav>
-        {loginLogoutButton}
       </div>
     </aside>
   )
