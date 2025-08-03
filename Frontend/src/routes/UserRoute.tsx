@@ -4,7 +4,6 @@ import Home from "@/pages/HomePage"
 import { Route, Routes } from "react-router-dom"
 import PublicRoute from "@/utils/protected/PublicRoute"
 import ProtectedRoute from "@/utils/protected/ProtectedRoute"
-import { UrlShortenerForm } from "@/features/shortner/components/UrlShortenerForm"
 import UserProfilePage from "@/pages/user/ProfilePage"
 import DashboardContent from "@/pages/Dashboard"
 
