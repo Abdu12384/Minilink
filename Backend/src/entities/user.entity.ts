@@ -3,7 +3,7 @@ import { Document } from "mongoose";
 export interface IUser {
   name: string;
   email: string;
-  phoneNumber: string;
+  phone: string;
   photoUrl?: string;
   photoPublicId?: string;
   googleId?: string;

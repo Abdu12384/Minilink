@@ -1,0 +1,8 @@
+import { UserDocument } from "../../entities/user.entity";
+import { IBaseRepository } from "./base-repository.interface";
+
+
+export interface IUserRepository extends IBaseRepository<UserDocument>{
+    findByEmail(email:string):Promise<UserDocument | null>
+    findById(id:string):Promise<UserDocument | null>
+}
