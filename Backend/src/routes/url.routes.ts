@@ -1,7 +1,8 @@
 import { Router, Request, Response } from "express";
-import { authController, urlController } from "../di";
+import {  urlController } from "../di";
 import { authMiddleware } from "../middlewares/auth.middleware";
-
+import { validateDto } from "../middlewares/validation.middleware";
+import { ShortenUrlDto } from "../utils/dto/url/url-input.dto";
 
 class UrlRoutes {
   public router: Router;
@@ -10,7 +11,7 @@ class UrlRoutes {
     this.initialRoutes();
   }
   initialRoutes(): void {
-    this.router.post("/shorten", authMiddleware, (req: Request, res: Response) => {
+    this.router.post("/shorten", validateDto(ShortenUrlDto), authMiddleware, (req: Request, res: Response) => {
       urlController.shortenUrl(req, res);
     });
 

@@ -7,6 +7,8 @@ import { CustomError } from "../utils/customError";
 import { ERROR_MESSAGES } from "../constants/message";
 import { HTTP_STATUS } from "../constants/statusCode";
 import { IUrl } from "../entities/url.entity";
+import { plainToInstance } from "class-transformer";
+import { UrlResponseDto } from "../utils/dto/url/url-response.dto";
 
 
 
@@ -83,10 +85,11 @@ export class UrlService implements IUrlService{
           HTTP_STATUS.NOT_FOUND
         );
       }
+
       return url.originalUrl;
     }
 
-    async getShortUrl(userId: string,limit:number,page:number): Promise<{items:IUrl[],totalPages:number}> {
+    async getShortUrl(userId: string,limit:number,page:number): Promise<{items:UrlResponseDto[],totalPages:number}> {
 
       const validPageNumber = Math.max(1,page||1);
       const validPageSize = Math.max(1,limit||5);
@@ -94,15 +97,19 @@ export class UrlService implements IUrlService{
 
       const {items,total} = await this.urlRepository.findAll({userId,isActive:true},skip,validPageSize,{createdAt:-1});
 
-      if (!items) {
+      const urlResponseDto = plainToInstance(UrlResponseDto, items, { excludeExtraneousValues: true });
+
+      if (!urlResponseDto) {
         throw new CustomError(
           ERROR_MESSAGES.URL_NOT_FOUND,
           HTTP_STATUS.NOT_FOUND
         );
       }
       const totalPages = Math.ceil(total / validPageSize);
-      return {items, totalPages};
+      return {items: urlResponseDto, totalPages};
     }
+
+
 
     async deleteUrl(id:string):Promise<{deletedUrl:IUrl}>{
       const deletedUrl = await this.urlRepository.update({_id:id},{isActive:false});

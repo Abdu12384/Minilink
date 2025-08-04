@@ -1,7 +1,6 @@
 import { Router, Request, Response } from "express";
 import { authController, userController } from "../di";
 import { authMiddleware } from "../middlewares/auth.middleware";
-import { CustomRequest } from "../utils/jwt";
 
 
 class UserRoutes {

@@ -9,6 +9,7 @@ import { verifyAccessToken } from "../utils/jwt";
 import { clearAuthCookies, setCookies, updateCookieWithAccessToken } from "../utils/helpers/cookie.herlper";
 import { IAuthController } from "../interface/controllerInterface/auth-controller.interface";
 import { error } from "console";
+import { RegisterUserDto } from "../utils/dto/auth/register-input.dto";
 
 
 
@@ -24,8 +25,8 @@ export class AuthController implements IAuthController{
  //===================================================================
  async register(req:Request,res:Response){
     try {
-      console.log(req.body)
-      const data = req.body;
+      console.log('register data',req.body)
+      const data:RegisterUserDto = req.body;
       console.log(data);
       const user = await this._authService.register(data);
       res.status(201).json({

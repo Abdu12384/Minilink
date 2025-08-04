@@ -13,6 +13,7 @@ export class UrlController implements IUrlController {
   async shortenUrl(req: Request, res: Response): Promise<void> {
     try {
       const { originalUrl } = req.body;
+      console.log("req.body",req.body)
 
       const userId = (req as unknown as CustomRequest).user.id;
 

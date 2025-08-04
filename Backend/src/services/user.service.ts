@@ -5,6 +5,8 @@ import { IUserRepository } from "../interface/repositoryInterface/user-repositor
 import { CustomError } from "../utils/customError";
 import { HTTP_STATUS } from "../constants/statusCode";
 import { ERROR_MESSAGES } from "../constants/message";
+import { plainToInstance } from "class-transformer";
+import { UserResponseDto } from "../utils/dto/user/user.response.dto";
 
 
 
@@ -19,12 +21,13 @@ export class UserService implements IUserService{
     ){}
 
 
-    async execute(id:string):Promise<IUser>{
-        const user = await this._userRepository.findById(id);
-        if(!user){
+    async execute(id:string):Promise<UserResponseDto>{
+        const userInfo = await this._userRepository.findById(id);
+        if(!userInfo){
             throw new CustomError(ERROR_MESSAGES.USER_NOT_FOUND,HTTP_STATUS.NOT_FOUND);
         }
-        return user;
+        const userResponseDto = plainToInstance(UserResponseDto, userInfo, { excludeExtraneousValues: true });
+        return userResponseDto;
     }
     
 }
