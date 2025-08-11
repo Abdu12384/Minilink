@@ -31,7 +31,10 @@ export const SignupPage: React.FC = () => {
   let navigate = useNavigate()
 
   const signupSchema = Yup.object().shape({
-    name: Yup.string().required("Full Name is required"),
+  name: Yup.string()
+    .trim() // removes spaces before validation
+    .required("Full Name is required")
+    .min(2, "Name must be at least 2 characters"),
     email: Yup.string().email("Invalid email address").required("Email is required"),
     phone: Yup.string()
       .matches(/^\+?[1-9]\d{1,14}$/, "Phone number is not valid")

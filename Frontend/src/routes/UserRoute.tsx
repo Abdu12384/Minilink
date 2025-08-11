@@ -1,5 +1,5 @@
 import { LoginPage } from "@/features/auth/components/Login"
-import { SignupPage } from "@/features/auth/components/Signin"
+import { SignupPage } from "@/features/auth/components/Signun"
 import Home from "@/pages/HomePage"
 import { Route, Routes } from "react-router-dom"
 import PublicRoute from "@/utils/protected/PublicRoute"
