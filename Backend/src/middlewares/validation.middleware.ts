@@ -17,7 +17,7 @@ export const validateDto = (DtoClass: any) => {
       });
     }
 
-    req.body = dtoObject; // validated and transformed
+    req.body = dtoObject; 
     next();
   };
 };

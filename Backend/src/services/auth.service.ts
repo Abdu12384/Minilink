@@ -20,7 +20,7 @@ export class AuthService implements IAuthService {
   ) {}
 
   async register(data: IUser): Promise<IUser> {
-    const user = await this._userRepository.findByEmail(data.email);
+    const user = await this._userRepository.findByEmail(data.email);                              
     if (user) {
       throw new CustomError(
         SUCCESS_MESSAGES.USER_ALREADY_EXISTS,
